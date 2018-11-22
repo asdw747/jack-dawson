@@ -24,11 +24,19 @@ public class CommonController {
             JdbcTemplate jdbcTemplate = new JdbcTemplate(myDataSource1);
             List<?> resultList = jdbcTemplate.queryForList("select * from contract");
             System.out.println("===>>>>>>>>>>>" + JSON.toJSONString(resultList));
+
+            System.currentTimeMillis();
         } catch (Exception e) {
             System.currentTimeMillis();
         }
 
         return "Hello World!";
+    }
+
+    @RequestMapping("/testVM")
+    private String testVM(){
+
+        return "templates/index";
     }
 
     public static void main(String[] args) throws Exception {
