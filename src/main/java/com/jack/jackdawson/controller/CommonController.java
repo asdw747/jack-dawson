@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -33,10 +35,9 @@ public class CommonController {
         return "Hello World!";
     }
 
-    @RequestMapping("/testVM")
-    private String testVM(){
-
-        return "templates/index";
+    @RequestMapping(value = "/testGet", method = RequestMethod.GET)
+    public String testGet(@RequestParam long userId){
+        return userId + "ok";
     }
 
     public static void main(String[] args) throws Exception {

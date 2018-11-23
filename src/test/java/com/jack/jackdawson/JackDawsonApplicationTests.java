@@ -1,9 +1,6 @@
 package com.jack.jackdawson;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.app.VelocityEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
-
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.StringWriter;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -30,14 +24,14 @@ public class JackDawsonApplicationTests {
 	@Autowired
 	ApplicationContext applicationContext;
 
-//	@Resource(name = "myDataSource1")
-//	private DataSource myDataSource1;
-//
-//	@Resource(name = "myDataSource2")
-//	private DataSource myDataSource2;
+	@Resource(name = "myDataSource1")
+	private DataSource myDataSource1;
 
-	@Autowired
-	VelocityEngine velocityEngine;
+	@Resource(name = "myDataSource2")
+	private DataSource myDataSource2;
+
+//	@Autowired
+//	VelocityEngine velocityEngine;
 
 	@Autowired
 	Jedis jedis;
@@ -67,28 +61,28 @@ public class JackDawsonApplicationTests {
  	*/
 	@Test
 	public void queryDataSource() {
-//		JdbcTemplate jdbcTemplate1 = new JdbcTemplate(myDataSource1);
-//		List<?> resultList1 = jdbcTemplate1.queryForList("select * from contract");
-//		System.out.println("===>>>>>>>>>>>" + JSON.toJSONString(resultList1));
-//
-//		JdbcTemplate jdbcTemplate2 = new JdbcTemplate(myDataSource2);
-//		List<?> resultList2 = jdbcTemplate2.queryForList("select * from user");
-//		System.out.println("===>>>>>>>>>>>" + JSON.toJSONString(resultList2));
+		JdbcTemplate jdbcTemplate1 = new JdbcTemplate(myDataSource1);
+		List<?> resultList1 = jdbcTemplate1.queryForList("select * from contract");
+		System.out.println("===>>>>>>>>>>>" + JSON.toJSONString(resultList1));
+
+		JdbcTemplate jdbcTemplate2 = new JdbcTemplate(myDataSource2);
+		List<?> resultList2 = jdbcTemplate2.queryForList("select * from user");
+		System.out.println("===>>>>>>>>>>>" + JSON.toJSONString(resultList2));
 	}
 
 	@Test
 	public void checkVelocity() {
-
-		VelocityContext context=new VelocityContext();
-		context.put("toUserName", "y");
-		context.put("message", "test");
-		context.put("fromUserName", "zhangyingsong");
-		context.put("time", "2018");
-
-		StringWriter sw = new StringWriter();
-		velocityEngine.mergeTemplate("templates/index.vm", "UTF-8", context, sw);
-
-		System.out.println(sw.toString());
+//
+//		VelocityContext context=new VelocityContext();
+//		context.put("toUserName", "y");
+//		context.put("message", "test");
+//		context.put("fromUserName", "zhangyingsong");
+//		context.put("time", "2018");
+//
+//		StringWriter sw = new StringWriter();
+//		velocityEngine.mergeTemplate("templates/index.vm", "UTF-8", context, sw);
+//
+//		System.out.println(sw.toString());
 
 	}
 
