@@ -1,5 +1,4 @@
 <html>
 hello, this is a vm view.
-$math.add(1, 2)
-$V.test()
+from $name
 </html>
