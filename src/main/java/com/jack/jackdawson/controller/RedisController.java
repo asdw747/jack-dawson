@@ -25,6 +25,8 @@ public class RedisController {
             String key = "testJedis";
             jedis.setex(key, 10, "ok");
             String value = jedis.get(key);
+
+            logger.debug("redis is ok.");
             return "redis is ok";
         } catch (Exception e) {
             logger.info("redis query error.", e);

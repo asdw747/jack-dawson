@@ -3,7 +3,7 @@
 
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %C{3}.%M(%F:%L) %m%n</Property>
-        <Property name="APP_LOG_ROOT">/home/work/ttt</Property>
+        <Property name="APP_LOG_ROOT">/home/work/log/jack-dawson</Property>
     </Properties>
 
     <Appenders>
