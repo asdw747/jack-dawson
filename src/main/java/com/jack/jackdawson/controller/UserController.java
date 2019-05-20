@@ -8,7 +8,7 @@ public class UserController {
 
     @GetMapping(value = "/test")
     @ResponseBody
-    public String test(@RequestParam long userId){
+    public String test(@RequestParam(required = false, defaultValue = "0") long userId){
         return userId + " ok";
     }
 
