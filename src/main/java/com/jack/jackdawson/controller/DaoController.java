@@ -12,8 +12,8 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "")
-public class CommonController {
+@RequestMapping(value = "dao")
+public class DaoController {
 
     @Resource(name = "myDataSource1")
     private DataSource myDataSource1;
@@ -21,7 +21,7 @@ public class CommonController {
     @Resource
     private UserDAO userDAO;
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public String index(){
         try {
