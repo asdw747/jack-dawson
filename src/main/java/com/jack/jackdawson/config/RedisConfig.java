@@ -20,13 +20,6 @@ public class RedisConfig {
     private Environment env;
 
     @Bean
-    public JedisCluster getJedisCluster() {
-        List<String> clusterNodes = new ArrayList<>();
-
-        return null;
-    }
-
-    @Bean
     public Jedis getJedis() {
         return new Jedis(env.getProperty("spring.redis.host"), Integer.parseInt(env.getProperty("spring.redis.port")));
     }
