@@ -2,11 +2,54 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/context
-                        http://www.springframework.org/schema/context/spring-context.xsd">
+                        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--<context:property-placeholder location="classpath:application.properties" ignore-unresolvable="true"/>-->
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.jack.jackdawson"/>
+
+    <jpa:repositories base-package="com.jack.jackdawson.repository.jack"
+                      entity-manager-factory-ref="entityManagerFactory"
+                      transaction-manager-ref="transactionManager"/>
+
+    <tx:annotation-driven proxy-target-class="true"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="jackMaster"/>
+        <property name="packagesToScan" value="com.jack.jackdawson.entity.jack"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQL55Dialect"/>
+                <property name="generateDdl" value="true"/>
+                <property name="showSql" value="true"/>
+            </bean>
+        </property>
+        <!--<property name="jpaProperties">-->
+        <!--<props>-->
+        <!--&lt;!&ndash;<prop key="enable_lazy_load_no_trans">false</prop>&ndash;&gt;-->
+        <!--&lt;!&ndash;<prop key="">false</prop>&ndash;&gt;-->
+        <!--&lt;!&ndash;<prop key="">true</prop>&ndash;&gt;-->
+        <!--</props>-->
+        <!--</property>-->
+    </bean>
+
+    <!--<bean id="rwDataSource" class="com.jack.jackdawson.database.DBRouter">-->
+    <!--<property name="targetDataSources">-->
+    <!--<map key-type="com.xiaomi.mifi.cc.admin.common.database.Strategy">-->
+    <!--<entry key="MASTER" value-ref="masterDataSource"/>-->
+    <!--<entry key="SLAVE" value-ref="slaveDataSource"/>-->
+    <!--</map>-->
+    <!--</property>-->
+    <!--<property name="defaultTargetDataSource" ref="masterDataSource"/>-->
+    <!--</bean>-->
 
 </beans>
