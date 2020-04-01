@@ -20,16 +20,10 @@ import org.springframework.context.annotation.ImportResource;
 @ComponentScan
 @ImportResource({"classpath:applicationContext.xml"})
 @EnableAutoConfiguration
-public class JackDawsonApplication extends SpringBootServletInitializer {
+public class JackDawsonApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JackDawsonApplication.class, args);
-	}
-
-	@Override//为了打包SpringBoot项目
-	protected SpringApplicationBuilder configure(
-			SpringApplicationBuilder builder) {
-		return builder.sources(this.getClass());
 	}
 
 }

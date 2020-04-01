@@ -1,2 +1,0 @@
-mvn -U clean install
-java -jar [jar包名]

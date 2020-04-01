@@ -17,11 +17,8 @@ public class UserController {
     @GetMapping(value = "/test")
     @ResponseBody
     public String test(@RequestParam(required = false, defaultValue = "0") long userId){
-        List<User> users = userInfoBiz.listByName("令狐冲");
-
-        return "";
-//        User user = userInfoBiz.getById(userId);
-//        return user != null ? JSON.toJSONString(user) : "查无此人";
+        User user = userInfoBiz.getById(userId);
+        return user != null ? JSON.toJSONString(user) : "查无此人";
     }
 
 }
