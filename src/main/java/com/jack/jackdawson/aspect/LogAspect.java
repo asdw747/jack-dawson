@@ -18,7 +18,7 @@ import com.jack.jackdawson.annotation.ParamLog;
 public class LogAspect {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-    @Pointcut("execution(* com.jack.jackdawson.biz.*.*(..))")
+    @Pointcut("execution(* com.jack.jackdawson.biz..*(..))")
     public void serviceLog() {
     }
 

@@ -28,7 +28,7 @@
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="jackMaster"/>
+        <property name="dataSource" ref="rwDataSource"/>
         <property name="packagesToScan" value="com.jack.jackdawson.entity.jack"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -37,23 +37,16 @@
                 <property name="showSql" value="true"/>
             </bean>
         </property>
-        <!--<property name="jpaProperties">-->
-        <!--<props>-->
-        <!--&lt;!&ndash;<prop key="enable_lazy_load_no_trans">false</prop>&ndash;&gt;-->
-        <!--&lt;!&ndash;<prop key="">false</prop>&ndash;&gt;-->
-        <!--&lt;!&ndash;<prop key="">true</prop>&ndash;&gt;-->
-        <!--</props>-->
-        <!--</property>-->
     </bean>
 
-    <!--<bean id="rwDataSource" class="com.jack.jackdawson.database.DBRouter">-->
-    <!--<property name="targetDataSources">-->
-    <!--<map key-type="com.xiaomi.mifi.cc.admin.common.database.Strategy">-->
-    <!--<entry key="MASTER" value-ref="masterDataSource"/>-->
-    <!--<entry key="SLAVE" value-ref="slaveDataSource"/>-->
-    <!--</map>-->
-    <!--</property>-->
-    <!--<property name="defaultTargetDataSource" ref="masterDataSource"/>-->
-    <!--</bean>-->
+    <bean id="rwDataSource" class="com.jack.jackdawson.common.database.DBRouter">
+        <property name="targetDataSources">
+            <map key-type="com.jack.jackdawson.common.database.Strategy">
+                <entry key="MASTER" value-ref="jackMaster"/>
+                <entry key="SLAVE" value-ref="jackMaster"/>
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="jackMaster"/>
+    </bean>
 
 </beans>
