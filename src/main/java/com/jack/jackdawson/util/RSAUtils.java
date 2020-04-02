@@ -10,6 +10,9 @@ import java.util.Base64;
 @Slf4j
 public class RSAUtils {
 
+    private static final String KEY_ALGORITHM = "RSA";
+    private static final String SIGNATURE_ALGORITHM = "SHA1WithRSA";
+
     /**
      * 得到产生的私钥/公钥对
      * @return KeyPair
@@ -18,7 +21,7 @@ public class RSAUtils {
         //产生RSA密钥对(myKeyPair)
         KeyPairGenerator myKeyGen = null;
         try {
-            myKeyGen = KeyPairGenerator.getInstance("RSA");
+            myKeyGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
             myKeyGen.initialize(1024);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -38,7 +41,7 @@ public class RSAUtils {
         Signature sign;
         String res = "";
         try {
-            sign = Signature.getInstance("MD5WithRSA");
+            sign = Signature.getInstance(SIGNATURE_ALGORITHM);
             sign.initSign(getPrivateKey(privateKey));
             sign.update(data.getBytes());
             byte[] signSequ = sign.sign();
@@ -63,7 +66,7 @@ public class RSAUtils {
     public static boolean verifySign(String publicKey, String data, String sign) {
         boolean res = true;
         try {
-            Signature signature = Signature.getInstance("MD5withRSA");
+            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
             signature.initVerify(getPublicKey(publicKey));
             signature.update(data.getBytes());
             res = signature.verify(Base64.getDecoder().decode(sign));
