@@ -45,7 +45,7 @@ public class DataSourceConfig implements EnvironmentAware {
     @Bean(name = "jackMaster")
     @Qualifier("jackMaster")
     @ConfigurationProperties(prefix="spring.datasource.jack")
-    public DataSource getMyDataSource2(){
+    public DataSource jackMasterDataSource(){
         DatabaseConnectionConfigurer configurer = getDatabaseConnectionConfigurer();
         String url = configurer.getValue("jack_master_db_url");
         String username = configurer.getValue("jack_master_db_username");
@@ -65,7 +65,7 @@ public class DataSourceConfig implements EnvironmentAware {
         DatabaseConnectionConfigurer connectionConfigurer = new DatabaseConnectionConfigurer();
         connectionConfigurer.setLocations(new ClassPathResource("config/db.properties"));
         String location = env.getProperty("location");
-        if ("production".equals(env.getProperty("location")) || "staging".equals(env.getProperty("location"))) {
+        if ("production".equals(location) || "staging".equals(location)) {
             connectionConfigurer.setKeyCryptor(new KeyCryptor());
         } else {
             connectionConfigurer.setKeyCryptor(new KeyCryptorFake());

@@ -1,5 +1,6 @@
 package com.jack.jackdawson.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -7,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.jack.jackdawson.biz.UserInfoBiz;
 import com.jack.jackdawson.entity.jack.User;
 
+@Slf4j
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -18,7 +20,18 @@ public class UserController {
     @ResponseBody
     public String test(@RequestParam(required = false, defaultValue = "0") long userId){
         User user = userInfoBiz.getById(userId);
+        log.info("test, {}", user);
         return user != null ? JSON.toJSONString(user) : "查无此人";
+    }
+
+    @GetMapping(value = "/list")
+    @ResponseBody
+    public String list(){
+        log.info("list all user");
+        List<User> user = userInfoBiz.listAll();
+        log.info("list result {}", user);
+
+        return JSON.toJSONString(user);
     }
 
 }
