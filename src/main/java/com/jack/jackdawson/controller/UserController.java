@@ -10,6 +10,7 @@ import com.jack.jackdawson.biz.UserInfoBiz;
 import com.jack.jackdawson.entity.jack.User;
 import com.jack.jackdawson.model.enums.UserType;
 
+@Slf4j
 @RestController
 @RequestMapping("user")
 @Slf4j
@@ -32,7 +33,18 @@ public class UserController {
         List<String> e = userType2.getExtraInfos();
 
         User user = userInfoBiz.getById(userId);
+        log.info("test, {}", user);
         return user != null ? JSON.toJSONString(user) : "查无此人";
+    }
+
+    @GetMapping(value = "/list")
+    @ResponseBody
+    public String list(){
+        log.info("list all user");
+        List<User> user = userInfoBiz.listAll();
+        log.info("list result {}", user);
+
+        return JSON.toJSONString(user);
     }
 
 }

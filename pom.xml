@@ -48,7 +48,7 @@
 				</property>
 			</activation>
 			<properties>
-				<location>c3</location>
+				<location>production</location>
 			</properties>
 		</profile>
 	</profiles>

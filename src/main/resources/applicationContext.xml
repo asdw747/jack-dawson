@@ -17,18 +17,18 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.jack.jackdawson"/>
 
-    <jpa:repositories base-package="com.jack.jackdawson.repository.jack"
-                      entity-manager-factory-ref="entityManagerFactory"
-                      transaction-manager-ref="transactionManager"/>
-
     <tx:annotation-driven proxy-target-class="true"/>
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    <jpa:repositories base-package="com.jack.jackdawson.repository.jack"
+                      entity-manager-factory-ref="jackEntityManagerFactory"
+                      transaction-manager-ref="jackTransactionManager"/>
+
+    <bean id="jackTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="jackEntityManagerFactory"/>
     </bean>
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="rwDataSource"/>
+    <bean id="jackEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="jackDBRouter"/>
         <property name="packagesToScan" value="com.jack.jackdawson.entity.jack"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -39,7 +39,7 @@
         </property>
     </bean>
 
-    <bean id="rwDataSource" class="com.jack.jackdawson.common.database.DBRouter">
+    <bean id="jackDBRouter" class="com.jack.jackdawson.common.database.DBRouter">
         <property name="targetDataSources">
             <map key-type="com.jack.jackdawson.common.database.Strategy">
                 <entry key="MASTER" value-ref="jackMaster"/>
