@@ -10,7 +10,6 @@ import com.jack.jackdawson.biz.UserInfoBiz;
 import com.jack.jackdawson.entity.jack.User;
 import com.jack.jackdawson.model.enums.UserType;
 
-@Slf4j
 @RestController
 @RequestMapping("user")
 @Slf4j
